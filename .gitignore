@@ -1,0 +1,55 @@
+#Ignore temporary files
+
+*.retry
+*.tmp
+*.log
+*.swp
+
+#Ignore all Python cache files
+
+pycache/
+*.pyc
+*.pyo
+
+#Ignore SSH keys (never commit private keys)
+
+*.pem
+*.pub
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+#Ignore Ansible facts cache if enabled
+
+.fact_cache/
+
+#Ignore Vault password file
+
+.vault_pass.txt
+.vault_pass
+.vault
+
+#Ignore Virtual Environments
+
+venv/
+.env/
+
+#Ignore system files
+
+.DS_Store
+Thumbs.db
+
+#Ignore VSCode settings (if you use VSCode)
+
+.vscode/
+
+#Ignore editor backup files
+
+*~
+*.bak
+
+#Ignore build or artifact folders (if added later)
+
+build/
+dist/
