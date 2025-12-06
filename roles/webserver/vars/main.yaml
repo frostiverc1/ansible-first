@@ -1,0 +1,4 @@
+---
+site_title: "Ansible demo site"
+heading: "Well hello there!"
+body_text: "Jinja 2 template rendered by ansible"

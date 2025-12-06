@@ -1,0 +1,59 @@
+---
+- name: install nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: create deploy user
+  user:
+    name: deploy
+    groups: sudo
+    shell: /bin/bash
+    state: present
+    create_home: yes
+
+- name: install ufw firewall
+  apt:
+    name: ufw
+    state: present
+
+- name: allow ssh through the firewall
+  ufw:
+    rule: allow
+    port: "22"
+    proto: tcp
+
+- name: allow http through the firewall
+  ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+
+- name: enable the firewall
+  ufw:
+    state: enabled
+    policy: deny
+
+- name: deploy nginx default config
+  template:
+    src: nginx-default.conf.j2
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+    mode: "0644"
+  notify: reload nginx
+
+- name: make sure nginx is up and running
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: deploy templated index.html
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: "0644"
