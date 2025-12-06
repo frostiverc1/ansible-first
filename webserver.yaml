@@ -3,7 +3,7 @@
   hosts: webservers
   become: yes
 
-  # this is for the templates/.jt file. if not using it then you can comment this out.
+  # this is for the templates/.j2 file. if not using it then you can comment this out.
   vars:
     site_title: "Ansible demo site"
     heading: "Well hello there!"
@@ -29,7 +29,7 @@
       apt:
         name: ufw
         state: present
-        update_cache: yes
+        # update_cache: yes            # why run twice? commented
       
     - name: allow ssh through the firewall
       ufw:
